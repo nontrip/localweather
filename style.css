@@ -164,3 +164,9 @@ p {
     margin-top: 30px;
     font-size: 36px;
 }
+
+@media (max-width: 330px) {
+    .showbox {
+        top: 60vh;
+    }
+}
