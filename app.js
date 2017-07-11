@@ -52,7 +52,7 @@ $(document).ready(function(){
         var lat = response.latitude;
         var lon = response.longitude;
         var key = 'fe97d937ab684597040829d2b17fb071';
-        var api = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + key;
+        var api = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + key;
         getWeather(api);
     });
 
