@@ -1,22 +1,60 @@
 var time = new Date().getHours();
 var getWeather = function(api){
+    var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 
-$.ajax({
-    url: api,
- 
-    // The name of the callback parameter, as specified by the YQL service
-    jsonp: "callback",
- 
-    // Tell jQuery we're expecting JSONP
-    dataType: "jsonp",
- 
-    // Tell YQL what we want and that we want JSON
-    data: {
-        format: "json"
-    },
- 
-    // Work with the response
-    success: function( data ) {
+    var xhr = new XHR();
+
+xhr.open('GET', api, true);
+
+xhr.onload = function() {
+  var data = JSON.parse(this.responseText);
+
+  var temp_c = Math.round(data.main.temp - 273.15);
+        var temp_f = Math.round(1.8 * (data.main.temp - 273.15) + 32);
+        var desc = data.weather[0].description;
+        var id = data.weather[0].id;
+        var bg;
+
+        if (id <= 232) {
+        bg = 'storm.svg';
+      } else if (id >= 300 && id <= 321) {
+        bg = 'rain.svg';
+      } else if (id >= 500 && id <= 531) {
+        bg = 'rain.svg';
+      } else if (id >= 600 && id <= 622) {
+        bg = 'snowflake.svg';
+      } else if (id >= 701 && id <= 781) {
+        bg = 'cloudy.svg';
+      } else if (id == 800) {
+        if (time > 6 && time < 22) {
+            bg = 'sun.svg';
+        } else {
+            bg = 'moon.svg';
+        }
+      } else if (id >= 801 && id <= 804) {
+        bg = 'cloudy.svg';
+      } else if (id >= 900 && id <= 906) {
+        bg = 'stormy.svg';
+      } else if (id >= 951 && id <= 962) {
+        bg = 'cloud.svg';
+      } else {
+        bg = 'cloud.svg';
+      }
+
+      $('img').attr('src', bg);
+      $('#temp_c').text(temp_c);
+      $('#temp_f').text(temp_f);
+      $('#description').text(desc+'.');
+      response = true;
+}
+
+xhr.onerror = function() {
+  alert( 'Ошибка ' + this.status );
+}
+
+xhr.send();
+
+    /*$.getJSON(api, function(data){
         var temp_c = Math.round(data.main.temp - 273.15);
         var temp_f = Math.round(1.8 * (data.main.temp - 273.15) + 32);
         var desc = data.weather[0].description;
@@ -54,9 +92,7 @@ $.ajax({
       $('#temp_f').text(temp_f);
       $('#description').text(desc+'.');
       response = true;
-    }
-});
-
+    });*/
 }
 
 var colors = ['#d62d20', '#0057e7', '#008744', '#ffa700'];
