@@ -1,7 +1,11 @@
 var time = new Date().getHours();
 var getWeather = function(api){
-    $.getJSON(api, function(data){
-        var temp_c = Math.round(data.main.temp - 273.15);
+    $.ajax({
+  type:     "GET",
+  url:      api,
+  dataType: "jsonp",
+  success: function(data){
+   var temp_c = Math.round(data.main.temp - 273.15);
         var temp_f = Math.round(1.8 * (data.main.temp - 273.15) + 32);
         var desc = data.weather[0].description;
         var id = data.weather[0].id;
@@ -38,7 +42,8 @@ var getWeather = function(api){
       $('#temp_f').text(temp_f);
       $('#description').text(desc+'.');
       response = true;
-    });
+  }
+});
 }
 
 var colors = ['#d62d20', '#0057e7', '#008744', '#ffa700'];
