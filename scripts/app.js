@@ -8,29 +8,29 @@ var getWeather = function(api){
         var bg;
 
         if (id <= 232) {
-        bg = 'storm.svg';
+        bg = 'img/storm.svg';
       } else if (id >= 300 && id <= 321) {
-        bg = 'rain.svg';
+        bg = 'img/rain.svg';
       } else if (id >= 500 && id <= 531) {
-        bg = 'rain.svg';
+        bg = 'img/rain.svg';
       } else if (id >= 600 && id <= 622) {
-        bg = 'snowflake.svg';
+        bg = 'img/snowflake.svg';
       } else if (id >= 701 && id <= 781) {
-        bg = 'cloudy.svg';
+        bg = 'img/cloudy.svg';
       } else if (id == 800) {
         if (time > 6 && time < 22) {
-            bg = 'sun.svg';
+            bg = 'img/sun.svg';
         } else {
-            bg = 'moon.svg';
+            bg = 'img/moon.svg';
         }
       } else if (id >= 801 && id <= 804) {
-        bg = 'cloudy.svg';
+        bg = 'img/cloudy.svg';
       } else if (id >= 900 && id <= 906) {
-        bg = 'stormy.svg';
+        bg = 'img/stormy.svg';
       } else if (id >= 951 && id <= 962) {
-        bg = 'cloud.svg';
+        bg = 'img/cloudy.svg';
       } else {
-        bg = 'cloud.svg';
+        bg = 'img/cloudy.svg';
       }
 
       $('img').attr('src', bg);
@@ -66,7 +66,7 @@ $(document).ready(function(){
 
     changeColor();
 
-    var qwerty = function(){
+    var transition = function(){
         if (response){
             $('#start').animate({opacity: 0}, 1500, function(){
                 $('#start').css('display', 'none');
@@ -80,7 +80,7 @@ $(document).ready(function(){
         }
     }
 
-   setInterval(qwerty, 1000);
+   setInterval(transition, 1000);
 
    $('#weather').css('margin-top', ($(window).height())/2-226.5);
 
